@@ -14,4 +14,4 @@ sudo systemctl restart sshd
 echo "After change:"
 grep "^PermitRootLogin" /etc/ssh/sshd_config
 
-echo "Root SSH login disabled successfully."
+echo "Root SSH login disabled successfully." 
