@@ -49,7 +49,7 @@ sudo bash fail2ban-setup.sh
 ```
 ---
 
-## ​ Compliance Mapping
+## ​📊 Compliance Mapping
 
 | Control Area         | Hardening Script        | Compliance Standard        |
 |----------------------|-------------------------|----------------------------|
@@ -59,7 +59,7 @@ sudo bash fail2ban-setup.sh
 
 ---
 
-## ​ Future Enhancements
+## ​🔮 Future Enhancements
 - Add **AIDE** for file integrity monitoring
 - Automate **patch management** for critical updates
 - Add **audit logging configuration**
