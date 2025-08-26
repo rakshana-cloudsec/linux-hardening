@@ -49,7 +49,7 @@ sudo bash fail2ban-setup.sh
 ```
 ---
 
-## 📊 Compliance Mapping
+## ​ Compliance Mapping
 
 | Control Area         | Hardening Script        | Compliance Standard        |
 |----------------------|-------------------------|----------------------------|
@@ -59,13 +59,19 @@ sudo bash fail2ban-setup.sh
 
 ---
 
-## 🔮 Future Enhancements
-- Add **AIDE** for file integrity monitoring  
-- Automate **patch management** for critical updates  
-- Add **audit logging configuration**  
-- Convert scripts into **Ansible roles** for enterprise-scale deployment  
+## ​ Future Enhancements
+- Add **AIDE** for file integrity monitoring
+- Automate **patch management** for critical updates
+- Add **audit logging configuration**
+- Convert scripts into **Ansible roles** for enterprise-scale deployment
 
 ---
+
+## ​ Author
+**Rakshana Kannaya Muralidharan**  
+Master of Cybersecurity | Cloud & Linux Security Enthusiast
+
+🔗 [GitHub](https://github.com/rakshana-cloudsec)
 
 ## 👤 Author
 **Rakshana Kannaya Muralidharan**  
