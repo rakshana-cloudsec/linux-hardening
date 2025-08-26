@@ -1,14 +1,28 @@
 #!/bin/bash
-# Script to disable root login via SSH
+# ------------------------------------------------------------
+# Linux Server Hardening Script
+# Disable root login over SSH (with backup & rollback support)
+# Author: Rakshana Kannaya Muralidharan
+# ------------------------------------------------------------
 
 CONFIG_FILE="/etc/ssh/sshd_config"
+BACKUP_FILE="/etc/ssh/sshd_config.bak"
 
-echo "Before change:"
-grep "^PermitRootLogin" $CONFIG_FILE || echo "PermitRootLogin not set"
+# Function to disable root login
+disable_root_login() {
+    echo "[INFO] Disabling root login in $CONFIG_FILE ..."
 
-sudo sed -i 's/^#*PermitRootLogin.*/PermitRootLogin no/' $CONFIG_FILE
+    # Create backup if not exists
+    if [ ! -f "$BACKUP_FILE" ]; then
+        echo "[INFO] Creating backup at $BACKUP_FILE"
+        sudo cp "$CONFIG_FILE" "$BACKUP_FILE"
+    else
+        echo "[INFO] Backup already exists at $BACKUP_FILE"
+    fi
 
-echo "After change:"
-grep "^PermitRootLogin" $CONFIG_FILE
-echo "Root login via SSH has been disabled."
+    # Update configuration
+    sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin no/' "$CONFIG_FILE"
 
+    # Validate SSH config before restart
+    if sudo sshd -t; then
+        echo "[SUCCESS] SSH config valid
