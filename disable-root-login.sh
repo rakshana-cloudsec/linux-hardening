@@ -25,4 +25,36 @@ disable_root_login() {
 
     # Validate SSH config before restart
     if sudo sshd -t; then
-        echo "[SUCCESS] SSH config valid
+        echo "[SUCCESS] SSH config validated."
+        sudo systemctl restart sshd
+        echo "[SUCCESS] Root login has been disabled. SSH service restarted."
+    else
+        echo "[ERROR] SSH config validation failed. Rolling back..."
+        sudo cp "$BACKUP_FILE" "$CONFIG_FILE"
+        sudo systemctl restart sshd
+        exit 1
+    fi
+}
+
+# Function to rollback to backup
+rollback_changes() {
+    if [ -f "$BACKUP_FILE" ]; then
+        echo "[INFO] Restoring backup from $BACKUP_FILE ..."
+        sudo cp "$BACKUP_FILE" "$CONFIG_FILE"
+        sudo systemctl restart sshd
+        echo "[SUCCESS] Rollback complete. Original SSH config restored."
+    else
+        echo "[ERROR] No backup found at $BACKUP_FILE. Cannot rollback."
+        exit 1
+    fi
+}
+
+# Main logic
+case "$1" in
+    --revert)
+        rollback_changes
+        ;;
+    *)
+        disable_root_login
+        ;;
+esac
