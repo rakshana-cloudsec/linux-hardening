@@ -1,7 +1,40 @@
-# linux-hardening
+# 🛡️ Linux Server Hardening – Disable Root SSH Login
 
-## Scripts
+![Shell Script](https://img.shields.io/badge/Script-Bash-blue)
+![Ubuntu Tested](https://img.shields.io/badge/Tested-Ubuntu%2020.04%2F22.04-brightgreen)
+![Security](https://img.shields.io/badge/Focus-Security-critical)
 
-### disable-root-login.sh
+---
 
-Bash script to disable root login over SSH by updating the sshd_config file and restarting the SSH service.
+## 🔒 Overview
+This project provides a **Bash script** to disable **root login over SSH** on Linux servers.  
+
+Disabling direct root SSH login is a critical security control because it:
+- Reduces brute-force attack risk on privileged accounts.
+- Enforces the **Principle of Least Privilege**.
+- Aligns with **CIS Benchmarks** and industry best practices.
+
+---
+
+## ⚙️ Features
+- 🔄 Creates a backup of `/etc/ssh/sshd_config` before making changes  
+- ✅ Validates SSH configuration with `sshd -t`  
+- 🚨 Provides clear success/failure messages  
+- 🔁 Includes rollback option (`--revert`) to restore previous config  
+- 💬 Fully commented and safe to use  
+
+---
+
+## 📋 Prerequisites
+- Linux server (**tested on Ubuntu 20.04 & 22.04**)  
+- Root or `sudo` privileges  
+- Git installed  
+
+---
+
+## 🚀 Usage
+
+Clone this repository:
+```bash
+git clone https://github.com/rakshana-cloudsec/linux-hardening.git
+cd linux-hardening
