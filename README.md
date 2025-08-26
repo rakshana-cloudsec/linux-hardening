@@ -38,3 +38,19 @@ Clone this repository:
 ```bash
 git clone https://github.com/rakshana-cloudsec/linux-hardening.git
 cd linux-hardening
+
+Run the script to disable root SSH login:
+sudo bash disable-root-login.sh
+
+
+Rollback (revert to original configuration):
+sudo bash disable-root-login.sh --revert
+
+
+Verify the change:
+sudo grep PermitRootLogin /etc/ssh/sshd_config
+
+
+Expected output:
+PermitRootLogin no
+
