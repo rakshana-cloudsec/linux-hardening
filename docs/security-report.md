@@ -46,7 +46,7 @@ Recommended order:
 sudo bash disable-root-login.sh
 sudo bash ufw-firewall.sh
 sudo bash fail2ban-setup.sh
-
+```
 ---
 
 ## 📊 Compliance Mapping
