@@ -67,15 +67,8 @@ sudo bash fail2ban-setup.sh
 
 ---
 
-## ​ Author
+## 👤 Author
 **Rakshana Kannaya Muralidharan**  
 Master of Cybersecurity | Cloud & Linux Security Enthusiast
 
 🔗 [GitHub](https://github.com/rakshana-cloudsec)
-
-## 👤 Author
-**Rakshana Kannaya Muralidharan**  
-Master of Cybersecurity | Cloud & Linux Security Enthusiast  
-
-🔗 [GitHub](https://github.com/rakshana-cloudsec)
-
