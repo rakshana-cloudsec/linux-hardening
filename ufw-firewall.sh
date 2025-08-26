@@ -1,30 +1,61 @@
 #!/bin/bash
+# ------------------------------------------------------------
+# Linux Server Hardening Script
+# Configure UFW (Uncomplicated Firewall) with secure defaults
+# Author: Rakshana Kannaya Muralidharan
+# ------------------------------------------------------------
 
-# Script to configure and enable UFW firewall
+# Function: setup UFW firewall
+setup_firewall() {
+    echo "[INFO] Starting UFW firewall configuration..."
 
-echo "Checking if UFW is installed..."
-if ! command -v ufw &> /dev/null; then
-    echo "UFW is not installed. Installing UFW..."
-    sudo apt update && sudo apt install ufw -y
-else
-    echo "UFW is already installed."
-fi
+    # Install ufw if not present
+    if ! command -v ufw &> /dev/null; then
+        echo "[INFO] UFW not found. Installing..."
+        sudo apt update && sudo apt install -y ufw
+    fi
 
-echo "Setting default firewall policies..."
-sudo ufw default deny incoming
-sudo ufw default allow outgoing
+    # Reset rules (optional: safe cleanup)
+    echo "[INFO] Resetting existing UFW rules..."
+    sudo ufw --force reset
 
-echo "Allowing SSH (port 22) to prevent locking yourself out..."
-sudo ufw allow ssh
+    # Default policies
+    echo "[INFO] Setting default policies: deny incoming, allow outgoing..."
+    sudo ufw default deny incoming
+    sudo ufw default allow outgoing
 
-# Example: Allow HTTP and HTTPS if this is a web server
-# sudo ufw allow http
-# sudo ufw allow https
+    # Allow SSH (to avoid locking yourself out)
+    echo "[INFO] Allowing SSH on port 22..."
+    sudo ufw allow 22/tcp
 
-echo "Enabling UFW..."
-sudo ufw --force enable
+    # Example: Allow HTTP/HTTPS
+    echo "[INFO] Allowing HTTP (80) and HTTPS (443)..."
+    sudo ufw allow 80/tcp
+    sudo ufw allow 443/tcp
 
-echo "UFW status:"
-sudo ufw status verbose
+    # Enable firewall
+    echo "[INFO] Enabling UFW..."
+    sudo ufw --force enable
 
-echo "Firewall has been successfully configured and enabled."
+    # Show status
+    echo "[SUCCESS] Firewall configuration complete."
+    sudo ufw status verbose
+}
+
+# Function: rollback firewall (disable UFW)
+rollback_firewall() {
+    echo "[INFO] Disabling UFW and restoring default accept policies..."
+    sudo ufw --force disable
+    sudo ufw --force reset
+    echo "[SUCCESS] Firewall has been disabled and rules cleared."
+}
+
+# Main logic
+case "$1" in
+    --revert)
+        rollback_firewall
+        ;;
+    *)
+        setup_firewall
+        ;;
+esac
